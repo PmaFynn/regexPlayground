@@ -1,10 +1,18 @@
 from main import test_regex
 import re
 
-# Fixed pattern: removed square brackets and unnecessary word boundary
+"""
+    https://callumacrae.github.io/regex-tuesday/challenge1.html
+
+    This weeks Regex Tuesday challenge, the first challenge, is to make a regex which finds and highlights repeated words in a body of text. It is a fairly easy challenge, and future challenges will usually be trickier.
+
+    You should just wrap the repeated word in a <strong> element. For example, this is is a test should be turned into this is <strong>is</strong> a test.
+
+    To test a regular expression on the test cases below, type it into the text input. Each test case will be marked as passed or failed respectively - you are aiming to get as many test cases as you can to pass. Note that JavaScript must be enabled for this feature to work. The regex engine used is the JavaScript regex engine; it is similar to PCRE, but with a few differences.
+"""
+
 regex_pattern = r'(\b[^\s]+\b)\s(\1\b)'
 
-# Fixed replacement: using \1 instead of $1
 replacement = r'\1 <strong>\2</strong>'
 
 test_cases = [

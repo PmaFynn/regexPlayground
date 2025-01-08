@@ -18,10 +18,10 @@ def test_regex(
             - List of tuples (test_string, expected_replacement)
         replacement (str, optional): Replacement pattern to use with re.sub
     """
+    success = 0
     print(f"\nTesting pattern: {pattern}")
     if replacement:
         print(f"Replacement: {replacement}")
-        success = 0
     if flags:
         flag_names = []
         for flag, name in [
@@ -78,6 +78,9 @@ def test_regex(
                         print("✗ No match")
                     print(f"✗ Expected: '{expected_replacement}'")
                     print("Failed")
+        else:
+            if match:
+                success += 1
 
     print('\n\nSuccessful testcases:\n', success, 'out of', len(test_cases))
 
