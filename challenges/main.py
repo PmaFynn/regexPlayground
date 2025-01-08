@@ -4,7 +4,8 @@ from typing import List, Union, Tuple
 def test_regex(
     pattern: str,
     test_cases: List[Union[str, Tuple[str, str]]],
-    replacement: str = None
+    replacement: str = None,
+    flags: int = 0
 ):
     """
     Test a regex pattern against multiple strings and print the results.
@@ -20,9 +21,21 @@ def test_regex(
     print(f"\nTesting pattern: {pattern}")
     if replacement:
         print(f"Replacement: {replacement}")
+        success = 0
+    if flags:
+        flag_names = []
+        for flag, name in [
+            (re.IGNORECASE, 'IGNORECASE'),
+            (re.MULTILINE, 'MULTILINE'),
+            (re.DOTALL, 'DOTALL'),
+            (re.VERBOSE, 'VERBOSE')
+        ]:
+            if flags & flag:
+                flag_names.append(name)
+        print(f"Flags: {', '.join(flag_names)}")
     print("-" * 50)
     
-    compiled_pattern = re.compile(pattern)
+    compiled_pattern = re.compile(pattern, flags)
     
     for test_case in test_cases:
         # Handle both simple strings and tuple test cases
@@ -55,14 +68,18 @@ def test_regex(
             # Compare with expected replacement if provided
             if expected_replacement:
                 if replaced_text == expected_replacement:
-                    if match:
-                        print(f"✓ Matches expected replacement")
-                    else:
+                    success += 1
+                    if not match:
                         print("✓ No match found. As intended!")
-                        print(f"✓ Matches expected replacement")
+                    print(f"✓ Matches expected replacement")
+                    print("Success")
                 else:
-                    print("✗ No match")
+                    if not match:
+                        print("✗ No match")
                     print(f"✗ Expected: '{expected_replacement}'")
+                    print("Failed")
+
+    print('\n\nSuccessful testcases:\n', success, 'out of', len(test_cases))
 
 # Example usage
 if __name__ == "__main__":
