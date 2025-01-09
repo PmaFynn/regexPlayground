@@ -4,7 +4,7 @@ from typing import List, Union, Tuple
 def test_regex(
     pattern: str,
     test_cases: List[Union[str, Tuple[str, str]]],
-    replacement: str = None,
+    replacement = None,
     flags: int = 0
 ):
     """
@@ -78,9 +78,20 @@ def test_regex(
                         print("✗ No match")
                     print(f"✗ Expected: '{expected_replacement}'")
                     print("Failed")
-        else:
+        if isinstance(expected_replacement, bool):
             if match:
-                success += 1
+                if expected_replacement == True:
+                    success += 1
+                    print(f"✓ Successful Testcase")
+                else:
+                    print(f"✗ No Successful Testcase")
+            else:
+                if expected_replacement == False:
+                    success += 1
+                    print(f"✓ No Match; as intended -> Successful Testcase")
+                else:
+                    print(f"✗ No Successful Testcase")
+
 
     print('\n\nSuccessful testcases:\n', success, 'out of', len(test_cases))
 
