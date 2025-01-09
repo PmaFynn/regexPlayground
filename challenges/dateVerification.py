@@ -11,7 +11,7 @@ import re
     To test a regular expression on the test cases below, type it into the text input. Each test case will be marked as passed or failed respectively - you are aiming to get as many test cases as you can to pass. Note that JavaScript must be enabled for this feature to work. The regex engine used is the JavaScript regex engine; it is similar to PCRE, but with a few differences.
 """
 
-solution_pattern = r'\b(?=\d{4})(1[0-9]{3}|200[0-9]|201[0-2])\/(?!00)(0[1-9]|1[0-2])\/(?!00)([0-2][0-9]|3[01])\s([01][0-9]|2[0-3])\:[0-5][0-9](?:\:[0-5][0-9])?$'
+solution_pattern = r'^(?=\d{4})(1[0-9]{3}|200[0-9]|201[0-2])\/(0[1-9]|1[0-2])\/(?!00)([0-2][0-9]|30)\s([01][0-9]|2[0-3])\:[0-5][0-9](?:\:[0-5][0-9])?$'
 
 # replacement = r'\1 <strong>\2</strong>'
 
